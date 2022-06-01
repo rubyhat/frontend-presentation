@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Col, Container, Row } from "react-bootstrap";
+import Todo from "./components/Todo/Todo";
 
-function App() {
+// Todo:
+// Add typescript
+// Add Readme
+// Add react-testing-library
+// Add storybook
+// Add axios and jsonplaceholder
+// Add mobx/redux
+
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <Row>
+          <Col sm={12}>
+            <header className="App-header">
+              <h1>Todo with React and Typescript</h1>
+            </header>
+          </Col>
+          <Col sm={12}>
+            <Todo />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
-}
+};
 
 export default App;
