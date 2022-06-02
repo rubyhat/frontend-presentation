@@ -1,5 +1,5 @@
 import { FC, useContext } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Alert, Button, Card } from "react-bootstrap";
 import { ITask } from "./Interfaces";
 import TodosContext from "../../context/TodoContext";
 
@@ -15,6 +15,9 @@ const TodoList: FC = () => {
 
   return (
     <>
+      {tasks && tasks.length === 0 && (
+        <Alert variant="info">Create your first task!</Alert>
+      )}
       {tasks &&
         [...tasks].reverse().map((task: ITask, key: number) => (
           <Card className="mb-3" key={key}>

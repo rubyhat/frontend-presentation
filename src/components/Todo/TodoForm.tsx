@@ -25,8 +25,21 @@ const TodoForm: FC = () => {
     ]);
   };
 
+  const resetForm = () => {
+    setIsDeadline(false);
+    setTaskName("");
+    setTaskDescription("");
+    setTaskDeadline("");
+  };
+
   return (
-    <Form onSubmit={(event) => event.preventDefault()} className="mb-3">
+    <Form
+      onSubmit={(event) => {
+        event.preventDefault();
+        resetForm();
+      }}
+      className="mb-3"
+    >
       <TodoInput
         input={{
           title: "Task name",

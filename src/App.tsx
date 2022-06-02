@@ -1,4 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
+import { Header } from "./components/Header";
 import Todo from "./components/Todo/Todo";
 
 // Todo:
@@ -14,11 +15,7 @@ const App = () => {
     <div className="App">
       <Container>
         <Row>
-          <Col sm={12}>
-            <header className="App-header">
-              <h1>Todo with React and Typescript</h1>
-            </header>
-          </Col>
+          <Header />
           <Todo />
         </Row>
       </Container>
