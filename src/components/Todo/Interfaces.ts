@@ -4,6 +4,11 @@ export interface ITask {
   taskDeadline: string;
 }
 
+export interface ITaskContent {
+  tasks?: ITask[];
+  setTasks(prev: any): void;
+}
+
 export interface IInputState {
   value: string;
   setter(text: string): void;

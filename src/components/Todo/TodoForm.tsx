@@ -1,10 +1,12 @@
-import { FC, useState, ChangeEvent, useEffect } from "react";
+import { FC, useState, ChangeEvent, useContext } from "react";
 import { Form, Button } from "react-bootstrap";
 
 import { ITask } from "./Interfaces";
 import { TodoInput } from "./TodoInput";
+import TodosContext from "../../context/TodoContext";
 
 const TodoForm: FC = () => {
+  const { tasks, setTasks } = useContext(TodosContext);
   const [isDeadline, setIsDeadline] = useState<boolean>(false);
   const [taskName, setTaskName] = useState<string>("");
   const [taskDescription, setTaskDescription] = useState<string>("");
@@ -17,8 +19,8 @@ const TodoForm: FC = () => {
   };
 
   const handleAddTaskButton = (): void => {
-    setTaskList((prevTask) => [
-      ...prevTask,
+    setTasks((prev: ITask[]) => [
+      ...prev,
       { taskName, taskDescription, taskDeadline },
     ]);
   };
