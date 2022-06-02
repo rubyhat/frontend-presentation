@@ -1,16 +1,18 @@
 import { FC, useContext } from "react";
 import { Alert, Button, Card } from "react-bootstrap";
+
+import { TodosContext, AlertContext } from "../../context";
 import { ITask } from "./Interfaces";
-import TodosContext from "../../context/TodoContext";
 
 const TodoList: FC = () => {
   const { tasks, setTasks } = useContext(TodosContext);
+  const { setShowAlert } = useContext(AlertContext);
 
   const handleDeleteTaskButton = (taskId: string) => {
-    console.log("delete");
     setTasks((prevTasks: ITask[]) =>
       [...prevTasks].filter((task: ITask) => task.id !== taskId)
     );
+    setShowAlert({ isShow: true, variant: "danger", text: "Task deleted!" });
   };
 
   return (

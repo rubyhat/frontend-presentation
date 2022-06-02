@@ -1,13 +1,17 @@
-import { FC, useState, ChangeEvent, useContext } from "react";
-import { Form, Button } from "react-bootstrap";
+import { FC, useState, ChangeEvent, useContext, useEffect } from "react";
+import { Form, Button, Alert } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 
+import { TodosContext, AlertContext } from "../../context/";
 import { ITask } from "./Interfaces";
-import { TodoInput } from "./TodoInput";
-import TodosContext from "../../context/TodoContext";
+
+import TodoInput from "./TodoInput";
+import TodoAlert from "./TodoAlert";
 
 const TodoForm: FC = () => {
   const { setTasks } = useContext(TodosContext);
+  const { showAlert, setShowAlert } = useContext(AlertContext);
+
   const [isDeadline, setIsDeadline] = useState<boolean>(false);
   const [taskName, setTaskName] = useState<string>("");
   const [taskDescription, setTaskDescription] = useState<string>("");
@@ -23,23 +27,29 @@ const TodoForm: FC = () => {
       ...prev,
       { id: uuidv4(), taskName, taskDescription, taskDeadline },
     ]);
+    resetForm();
+    setShowAlert({ isShow: true, variant: "success", text: "Task created!" });
   };
+
+  useEffect(() => {
+    if (showAlert && showAlert.isShow) {
+      const timeout = setTimeout(() => {
+        setShowAlert({ isShow: false, variant: "", text: "" });
+      }, 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [showAlert, setShowAlert]);
 
   const resetForm = () => {
     setIsDeadline(false);
     setTaskName("");
     setTaskDescription("");
     setTaskDeadline("");
+    setShowAlert({ isShow: true, variant: "warning", text: "Form reseted!" });
   };
 
   return (
-    <Form
-      onSubmit={(event) => {
-        event.preventDefault();
-        resetForm();
-      }}
-      className="mb-3"
-    >
+    <Form onSubmit={(event) => event.preventDefault()} className="mb-3">
       <TodoInput
         input={{
           title: "Task name",
@@ -80,6 +90,7 @@ const TodoForm: FC = () => {
       <Button className="ms-3" onClick={resetForm} variant="warning">
         Reset Form
       </Button>
+      {showAlert && showAlert.isShow && <TodoAlert showAlert={showAlert} />}
     </Form>
   );
 };

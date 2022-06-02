@@ -1,13 +1,19 @@
 import { FC, useEffect, useState } from "react";
-import TodoForm from "./TodoForm";
-
-import TodosContext from "../../context/TodoContext";
-import { ITask } from "./Interfaces";
 import { Col } from "react-bootstrap";
+
+import { TodosContext, AlertContext } from "../../context";
+import { ITask, ITodoAlert } from "./Interfaces";
+
+import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 
 const Todo: FC = () => {
   const [tasks, setTasks] = useState<ITask[]>([]);
+  const [showAlert, setShowAlert] = useState<ITodoAlert>({
+    isShow: false,
+    variant: "",
+    text: "",
+  });
 
   useEffect(() => {
     console.log(tasks);
@@ -21,14 +27,16 @@ const Todo: FC = () => {
 
   return (
     <TodosContext.Provider value={{ tasks, setTasks }}>
-      <Col sm={12} md={6}>
-        <TodoForm />
-      </Col>
-      <Col sm={12} md={6}>
-        <div style={todoListStyles}>
-          <TodoList />
-        </div>
-      </Col>
+      <AlertContext.Provider value={{ showAlert, setShowAlert }}>
+        <Col sm={12} md={6}>
+          <TodoForm />
+        </Col>
+        <Col sm={12} md={6}>
+          <div style={todoListStyles}>
+            <TodoList />
+          </div>
+        </Col>
+      </AlertContext.Provider>
     </TodosContext.Provider>
   );
 };

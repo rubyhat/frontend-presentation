@@ -8,7 +8,7 @@ interface Props {
   inputState: IInputState;
 }
 
-export const TodoInput: FC<Props> = (props) => {
+const TodoInput: FC<Props> = (props) => {
   const { input, inputState } = props;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
@@ -27,3 +27,5 @@ export const TodoInput: FC<Props> = (props) => {
     </Form.Group>
   );
 };
+
+export default TodoInput;

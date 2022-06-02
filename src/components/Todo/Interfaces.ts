@@ -10,6 +10,11 @@ export interface ITaskContent {
   setTasks(prev: any): void;
 }
 
+export interface IAlertContent {
+  showAlert: ITodoAlert;
+  setShowAlert(prevAlert: ITodoAlert): void;
+}
+
 export interface IInputState {
   value: string;
   setter(text: string): void;
@@ -24,4 +29,10 @@ export interface IInput {
 export interface ITodoForm {
   value: ITask[];
   setter(items: ITask[]): string;
+}
+
+export interface ITodoAlert {
+  isShow: boolean;
+  variant: string;
+  text: string;
 }
