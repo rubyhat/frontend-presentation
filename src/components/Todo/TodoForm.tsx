@@ -77,6 +77,9 @@ const TodoForm: FC = () => {
       <Button onClick={handleAddTaskButton} variant="primary" type="submit">
         Create Task
       </Button>
+      <Button className="ms-3" onClick={resetForm} variant="warning">
+        Reset Form
+      </Button>
     </Form>
   );
 };
