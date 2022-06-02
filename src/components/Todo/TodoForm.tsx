@@ -1,17 +1,17 @@
 import { FC, useState, ChangeEvent, useContext } from "react";
 import { Form, Button } from "react-bootstrap";
+import { v4 as uuidv4 } from "uuid";
 
 import { ITask } from "./Interfaces";
 import { TodoInput } from "./TodoInput";
 import TodosContext from "../../context/TodoContext";
 
 const TodoForm: FC = () => {
-  const { tasks, setTasks } = useContext(TodosContext);
+  const { setTasks } = useContext(TodosContext);
   const [isDeadline, setIsDeadline] = useState<boolean>(false);
   const [taskName, setTaskName] = useState<string>("");
   const [taskDescription, setTaskDescription] = useState<string>("");
   const [taskDeadline, setTaskDeadline] = useState<string>("");
-  const [taskList, setTaskList] = useState<ITask[]>([]);
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const checked = event.target.checked;
@@ -21,12 +21,12 @@ const TodoForm: FC = () => {
   const handleAddTaskButton = (): void => {
     setTasks((prev: ITask[]) => [
       ...prev,
-      { taskName, taskDescription, taskDeadline },
+      { id: uuidv4(), taskName, taskDescription, taskDeadline },
     ]);
   };
 
   return (
-    <Form onSubmit={(event) => event.preventDefault()}>
+    <Form onSubmit={(event) => event.preventDefault()} className="mb-3">
       <TodoInput
         input={{
           title: "Task name",
@@ -62,7 +62,7 @@ const TodoForm: FC = () => {
         />
       )}
       <Button onClick={handleAddTaskButton} variant="primary" type="submit">
-        Submit
+        Create Task
       </Button>
     </Form>
   );

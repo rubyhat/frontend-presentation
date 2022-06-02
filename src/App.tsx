@@ -19,10 +19,7 @@ const App = () => {
               <h1>Todo with React and Typescript</h1>
             </header>
           </Col>
-          <Col sm={12} md={6}>
-            <Todo />
-          </Col>
-          <Col sm={12} md={6}></Col>
+          <Todo />
         </Row>
       </Container>
     </div>
