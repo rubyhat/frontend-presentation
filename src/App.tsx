@@ -9,6 +9,7 @@ import Todo from "./components/Todo/Todo";
 // Add storybook
 // Add axios and jsonplaceholder
 // Add mobx/redux
+// Add pop-up which fired on click buttons in form
 
 const App = () => {
   return (
